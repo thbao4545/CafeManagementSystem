@@ -1,0 +1,4 @@
+- Khi gán 2 object thì sài hàm deepcopy của thư viện copy
+	from copy import deepcopy
+
+-
