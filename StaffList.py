@@ -7,9 +7,12 @@ class StaffList:
 		self.list = sList.copy()
 		self.staffNumber = staffNumber
 
+	#Method for testing
+	
 	def print(self):
 		for staff in self.list:
 			print(staff.getInfo())
+
 	def  getStaffNumber(self): #Get number of staff in list
 		return self.staffNumber
 
@@ -23,28 +26,46 @@ class StaffList:
 		tempNumber = len(tempList)
 		return StaffList(tempNumber, tempList)
 
+	def  getByBirthday(self,birthday):
+		tempList = [staff for staff in self.list if staff.birthday == birthday]
+		tempNumber = len(tempList)
+		return StaffList(tempNumber, tempList)
+
+	def	getByAddress(self,address):
+		addresstempList = [staff for staff in self.list if staff.address == address]
+		tempNumber = len(tempList)
+		return StaffList(tempNumber, tempList)
+
 	def getByID(self, ID):
 		findStaff = None
 		for staff in self.list:
 			if staff.ID == ID:
 				findStaff = staff
-		return "None" if findStaff == None else deepcopy(findStaff)
+				break
 
+		return "None" if findStaff == None else findStaff
 
-if __name__ == '__main__':
-	info = dict(ID = 1, name = "Khang", gender = 0, birthday = "28-05-2003", address = "TV", 
-				startingDay = "4-2", deparment = Deparment(1, "Moc boc"))
-	newInfo = dict(ID = 2, name = "Puken", gender = 0, birthday = "28-05-2003", address = "TV", 
-				startingDay = "4-2", deparment = Deparment(1, "Moc boc"))
-	newStaff = Staff(info)
-	anotherStaff = deepcopy(newStaff)
-	anotherStaff.updateInfo(newInfo)
+	def updateStaffInfo(self, ID, info):
+		#Return Success neu co staff, nguoc lai return Fail
+		staff = self.getByID(ID)
+		if (staff == "None"):
+			return "Fail"
+		staff.updateInfo(info)
+		return "Success"
 
-	staffList = StaffList()
-	print(staffList.list)
-	staffList.addStaff(newStaff)
-	staffList.addStaff(anotherStaff)
-	print(staffList.list)
-	staff = staffList.getByID(1)
-	staff.ID = 3
-	print(staffList.print())
+# if __name__ == '__main__':
+# 	info = dict(ID = 1, name = "Khang", gender = 0, birthday = "28-05-2003", address = "TV", 
+# 				startingDay = "4-2", deparment = Deparment(1, "Moc boc"))
+# 	newInfo = dict(ID = 2, name = "Puken", gender = 0, birthday = "28-05-2003", address = "TV", 
+# 				startingDay = "4-2", deparment = Deparment(1, "Moc boc"))
+# 	newStaff = Staff(info)
+# 	anotherStaff = deepcopy(newStaff)
+# 	anotherStaff.updateInfo(newInfo)
+
+# 	staffList = StaffList()
+# 	print(staffList.print())
+# 	# staffList.addStaff(newStaff)
+# 	# print(staffList.print())
+# 	# staffList.updateStaffInfo(1, newInfo)
+# 	# print(staffList.print())
+# 	
