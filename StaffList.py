@@ -1,5 +1,4 @@
 from Staff import Staff
-from Deparment import Deparment
 from copy import deepcopy
 
 class StaffList:
@@ -9,63 +8,54 @@ class StaffList:
 
 	#Method for testing
 	
-	def print(self):
-		for staff in self.list:
-			print(staff.getInfo())
+	def addStaff(self, id, name, gender, birthday, address, startday, deparment): #Add a new staff to list
+		a = Staff(id, name, gender, birthday, address, startday, deparment)
+		self.list.append(a)
+		self.staffNumber += 1
+	def remove_nhanvien(self,id):
+		for i in self.list :
+			if i.get_ID() == id :
+				self.list.remove(i)
 
 	def  getStaffNumber(self): #Get number of staff in list
 		return self.staffNumber
 
-	def addStaff(self, staff): #Add a new staff to list
-		self.list.append(staff)
-		self.staffNumber += 1
-
-
 	def getByName(self, name): #Get a StaffList with staff with same name with input
-		tempList = [staff for staff in self.list if staff.name == name]
-		tempNumber = len(tempList)
-		return StaffList(tempNumber, tempList)
+		a = []
+		for i in self.list :
+			if str(name) in i.get_name() :
+				a.append(i)
+		return StaffList(0,a)
 
 	def  getByBirthday(self,birthday):
-		tempList = [staff for staff in self.list if staff.birthday == birthday]
-		tempNumber = len(tempList)
-		return StaffList(tempNumber, tempList)
+		a = []
+		for i in self.list :
+			if str(birthday) in i.get_birthday():
+				a.append(i)
+		return StaffList(0,a)
 
 	def	getByAddress(self,address):
-		addresstempList = [staff for staff in self.list if staff.address == address]
-		tempNumber = len(tempList)
-		return StaffList(tempNumber, tempList)
+		a = []
+		for i in self.list :
+			if str(address) in i.get_address():
+				a.append(i)
+		return StaffList(0,a)
 
 	def getByID(self, ID):
-		findStaff = None
-		for staff in self.list:
-			if staff.ID == ID:
-				findStaff = staff
-				break
+		a = []
+		for i in self.list :
+			if ID == i.get_ID():
+				a.append(i)
+		return StaffList(0,a)
 
-		return "None" if findStaff == None else findStaff
+	def sort_id(self) :
+		for i in range(0,len(self.list)) :
+			x = self.list[i].get_ID()
+			for j in range (i + 1, len(self.list)) :
+				y = self.list[j].get_ID()
+				if x > y :
+					s = self.list[i]
+					self.list[i] = self.list[j]
+					self.list[j] = s
 
-	def updateStaffInfo(self, ID, info):
-		#Return Success neu co staff, nguoc lai return Fail
-		staff = self.getByID(ID)
-		if (staff == "None"):
-			return "Fail"
-		staff.updateInfo(info)
-		return "Success"
 
-# if __name__ == '__main__':
-# 	info = dict(ID = 1, name = "Khang", gender = 0, birthday = "28-05-2003", address = "TV", 
-# 				startingDay = "4-2", deparment = Deparment(1, "Moc boc"))
-# 	newInfo = dict(ID = 2, name = "Puken", gender = 0, birthday = "28-05-2003", address = "TV", 
-# 				startingDay = "4-2", deparment = Deparment(1, "Moc boc"))
-# 	newStaff = Staff(info)
-# 	anotherStaff = deepcopy(newStaff)
-# 	anotherStaff.updateInfo(newInfo)
-
-# 	staffList = StaffList()
-# 	print(staffList.print())
-# 	# staffList.addStaff(newStaff)
-# 	# print(staffList.print())
-# 	# staffList.updateStaffInfo(1, newInfo)
-# 	# print(staffList.print())
-# 	
