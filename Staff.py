@@ -28,15 +28,11 @@ class Staff:
         
     def get_department(self):
         return self.deparment
+    def getInfo(self):
+        info = dict(ID = self.ID, name = self.name, gender = self.gender, birthday = self.birthday, address = self.address, startingDay = self.startingDay, deparment = deepcopy(self.deparment))
+        return info
 
-
-
-	def getInfo(self):
-		info = dict(ID = self.ID, name = self.name, gender = self.gender, birthday = self.birthday,
-						address = self.address, startingDay = self.startingDay, deparment = deepcopy(self.deparment))
-		return info
-
-if __name__ == '__main__':
+# if __name__ == '__main__':
 	# info = dict(ID = 1, name = "Khang", gender = 0, birthday = "28-05-2003", address = "TV", 
 	# 	startingDay = "4-2", deparment = Deparment(1, "Moc boc"))
 

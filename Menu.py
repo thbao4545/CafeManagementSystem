@@ -27,11 +27,18 @@ class Menu:
     def add_drink(self, new_drink: Drink):
         self.__drink_list.append(new_drink)
         self.__drink_number += 1
-        
+    def add_drink2(self, name: str, price: float):
+        new_drink = Drink(name, price, True, "24/7", True)
+        self.__drink_list.append(new_drink)
+        self.__drink_number += 1
+  
     def add_food(self, new_food: Food):
         self.__food_list.append(new_food)
         self.__food_number += 1
-        
+    def add_food2(self, name: str, price: float):
+        new_food = Drink(name, price, True, "24/7", True)
+        self.__food_list.append(new_food)
+        self.__food_number += 1    
     def get_drink_by_name(self, drink_name: str):
         for drink in self.drink_list:
             if drink.__name == drink_name:
@@ -57,22 +64,18 @@ class Menu:
     
     def sort_food_by_price(self):
         pass
-       
-# Testing    
-soda = Drink("soda", 10, True, "all day", False)
-coke = Drink("coke", 10, True, "morning", True)
-
-menu1 = Menu()
-menu1.add_drink(soda)
-menu1.add_drink(coke)
-
-
-
-menu2 = Menu(2, 0, menu1.get_drink_list(), [])
-
-for drink in menu2.get_drink_list():
-    drink.print_infor()
-    print("------------------------")
-
+    def remove_drink(self, drink_name: str):
+        for drink in self.__drink_list:
+            if drink.get_name() == drink_name:
+                self.__drink_list.remove(drink)
+                self.__drink_number -= 1
+                break
+    
+    def remove_food(self, food_name: str):
+        for food in self.__food_list:
+            if food.get_name() == food_name:
+                self.__food_list.remove(food)
+                self.__food_number -= 1
+                break
 
 
