@@ -427,10 +427,9 @@ def save_ordered_items():
 
         
 order_button = Button(order_frame, text='Đặt', command=save_ordered_items)
-order_button.grid(row=8, column=3)
+order_button.grid(row=7, column=3)
 
-
-Button(order_frame, text='Quay về',command=lambda: change_frame(main_frame, order_frame)).grid(row=15, column = 0)
+Button(order_frame, text='Quay về',command=lambda: change_frame(main_frame, order_frame)).grid(row=0, column = 3)
 
 # Revenue Frame
 revenue_frame = Frame(root)
