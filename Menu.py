@@ -60,7 +60,7 @@ class Menu:
             if drink.get_price()>=minPrice and drink.get_price()<maxPrice:
                 result.append(drink)
         return result
-    def get_food_by_price(self):
+    def get_food_by_price(self,minPrice:float,maxPrice:float):
         result=[]
         for food in self.__foodList:
             if food.get_price()>=minPrice and food.get_price()<maxPrice:

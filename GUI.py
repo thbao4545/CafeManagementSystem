@@ -200,18 +200,18 @@ Button(main_frame, text='Thực đơn', width=15, command=lambda: change_frame(m
 drink_number = 5
 food_number = 5
 drink_list = [
-    Drink("Phở gà", 50000, True, "Cả ngày", True),
-    Drink("Bún chả", 40000, True, "Cả ngày", False),
-    Drink("Cơm tấm", 35000, True, "Cả ngày", True),
-    Drink("Bánh mì  ", 20000, True, "Cả ngày", True),
-    Drink("Gỏi cuốn", 25000, True, "Cả ngày", False)
+    Drink("Phở gà", 50000, True, "Cả ngày","Pho ga xuat xu Nam Vang", True),
+    Drink("Bún chả", 40000, True, "Cả ngày","Bun cha mien tay, ngon nhuc nach", False),
+    Drink("Cơm tấm", 35000, True, "Cả ngày","Mon an binh dan", True),
+    Drink("Bánh mì  ", 20000, True, "Cả ngày","Do an nhanh", True),
+    Drink("Gỏi cuốn", 25000, True, "Cả ngày","Do an nhanh", False)
 ]
 food_list = [
-    Food("Trà đá", 2000, True, "Cả ngày", False),
-    Food("Cà phê đen", 20000, True, "Cả ngày", True),
-    Food("Cà phê sữa", 20000, True, "Cả ngày", False),
-    Food("Bạc xỉu", 22000, True, "Cả ngày", True),
-    Food("Nước mía", 15000, True, "Cả ngày", False)
+    Food("Trà đá", 2000, True, "Cả ngày","Thuc uong binh dan", False),
+    Food("Cà phê đen", 20000, True, "Cả ngày","Thuc uong cho nguoi sanh uong", True),
+    Food("Cà phê sữa", 20000, True, "Cả ngày","Thuc uong tao cam giac tinh tao lam viec", False),
+    Food("Bạc xỉu", 22000, True, "Cả ngày","Ngon me ly",True),
+    Food("Nước mía", 15000, True, "Cả ngày","ngon ngot",False)
 ]
 
 menu = Menu(drink_number, food_number, drink_list, food_list)
@@ -227,11 +227,11 @@ menu_tree.column("#2", width=100)
 menu_tree.grid(row=1, column=0, columnspan=2, sticky=W)
 
 def load_menu_data():
-    for index, item in enumerate(menu.get_drink_list()):
+    for index, item in enumerate(menu.get_drinkList()):
         menu_tree.insert("", index, text=str(index + 1), values=(item.get_name(), item.get_price()))
 
-    food_offset = len(menu.get_drink_list())
-    for index, item in enumerate(menu.get_food_list()):
+    food_offset = len(menu.get_drinkList())
+    for index, item in enumerate(menu.get_foodList()):
         menu_tree.insert("", index + food_offset, text=str(index + food_offset + 1), values=(item.get_name(), item.get_price()))
 load_menu_data()
 
@@ -264,9 +264,9 @@ def add_menu_item():
     price = float(item_price_entry.get())
     type = bool(item_type_var.get())
     if type:
-        menu.add_food2(name, price)
+        menu.add_food(name, price)
     else:
-        menu.add_drink2(name, price)
+        menu.add_drink(name, price)
 
     clear_inputs()
     update_menu_tree()
@@ -318,11 +318,11 @@ order_tree.column("#3", width=100)
 order_tree.column("#4", width=100)
 order_tree.grid(row=1, column=0, columnspan=2, sticky=W)
 def load_order_data():
-    for index, item in enumerate(menu.get_drink_list()):
+    for index, item in enumerate(menu.get_drinkList()):
         order_tree.insert("", index, text=str(index + 1), values=(item.get_name(), item.get_price(), item.get_available(), item.get_selling_time()))
 
-    food_offset = len(menu.get_drink_list())
-    for index, item in enumerate(menu.get_food_list()):
+    food_offset = len(menu.get_drinkList())
+    for index, item in enumerate(menu.get_foodList()):
         order_tree.insert("", index + food_offset, text=str(index + food_offset + 1), values=(item.get_name(), item.get_price(), item.get_available(), item.get_selling_time()))
 
 load_order_data()
