@@ -4,78 +4,113 @@ from Food import Food
 
 class Menu:
     
-    def __init__(self, drink_number = 0, food_number = 0, drink_list = [], food_list = []):
+    def __init__(self, drinkNumber = 0, foodNumber = 0, drinkList = [], foodList = []):
     
-        self.__drink_list = drink_list.copy()
-        self.__food_list = food_list.copy()
+        self.__drinkList = drinkList.copy()
+        self.__foodList = foodList.copy()
         
-        self.__drink_number = drink_number
-        self.__food_number = food_number
+        self.__drinkNumber = drinkNumber
+        self.__foodNumber = foodNumber
     
-    def get_drink_number(self):
-        return self.__drink_number
+    def get_drinkNumber(self):
+        return self.__drinkNumber
         
-    def get_food_number(self):
-        return self.__food_number
+    def get_foodNumber(self):
+        return self.__foodNumber
     
-    def get_drink_list(self):
-        return self.__drink_list
+    def get_drinkList(self):
+        return self.__drinkList
     
-    def get_food_list(self):
-        return self.__food_list
+    def get_foodList(self):
+        return self.__foodList
     
     def add_drink(self, new_drink: Drink):
-        self.__drink_list.append(new_drink)
-        self.__drink_number += 1
-    def add_drink2(self, name: str, price: float):
-        new_drink = Drink(name, price, True, "24/7", True)
-        self.__drink_list.append(new_drink)
-        self.__drink_number += 1
+        self.__drinkList.append(new_drink)
+        self.__drinkNumber += 1
+    def add_drink(self, name: str, price: float):
+        new_drink = Drink(name, price, True, "24/7","Thuc uong giai khat",True)
+        self.__drinkList.append(new_drink)
+        self.__drinkNumber += 1
   
     def add_food(self, new_food: Food):
-        self.__food_list.append(new_food)
-        self.__food_number += 1
-    def add_food2(self, name: str, price: float):
-        new_food = Drink(name, price, True, "24/7", True)
-        self.__food_list.append(new_food)
-        self.__food_number += 1    
-    def get_drink_by_name(self, drink_name: str):
-        for drink in self.drink_list:
-            if drink.__name == drink_name:
-                return drink
-                break
-        return None
+        self.__foodList.append(new_food)
+        self.__foodNumber += 1
+    def add_food(self, name: str, price: float):
+        new_food = Food(name, price, True, "24/7","Do an nhanh",True)
+        self.__foodList.append(new_food)
+        self.__foodNumber += 1    
+        
+    def get_drink_by_name(self, drinkName: str):
+        result=[]
+        for drink in self.__drinkList:
+            if drinkName in drink.get_name():
+                result.append(drink)
+        return result
     
-    def get_food_by_name(self, food_name: str):
-        for food in self.__food_list:
-            if food.__name == food_name:
-                return food
-                break
-        return None
+    def get_food_by_name(self, foodName: str):
+        result=[]
+        for food in self.__foodList:
+            if foodName in food.get_name():
+                result.append(food)
+        return result
     
-    def get_drink_by_price(self):
-        pass
-    
+    def get_drink_by_price(self,minPrice:float,maxPrice:float):
+        result=[]
+        for drink in self.__drinkList:
+            if drink.get_price()>=minPrice and drink.get_price()<maxPrice:
+                result.append(drink)
+        return result
     def get_food_by_price(self):
-        pass
+        result=[]
+        for food in self.__foodList:
+            if food.get_price()>=minPrice and food.get_price()<maxPrice:
+                result.append(food)
+        return result
     
-    def sort_drink_by_price(self):
-        pass 
-    
-    def sort_food_by_price(self):
-        pass
+    def sortUP_drink_by_price(self):
+        self.__drinkList=sorted(self.get_drinkList(), key=lambda drink: drink.get_price()) 
+    def sortDOWN_drink_by_price(self):
+        self.sortUP_drink_by_price()
+        self.__drinkList.reverse()
+        
+    def sortUP_food_by_price(self):
+        self.__foodList=sorted(self.get_foodList(), key=lambda food: food.get_price())
+    def sortDOWN_food_by_price(self):
+        self.sortUP_food_by_price()
+        self.__foodList.reverse()
+            
     def remove_drink(self, drink_name: str):
-        for drink in self.__drink_list:
+        for drink in self.__drinkList:
             if drink.get_name() == drink_name:
-                self.__drink_list.remove(drink)
-                self.__drink_number -= 1
-                break
+                self.__drinkList.remove(drink)
+                self.__drinkNumber -= 1
+                return True
+        return False
     
     def remove_food(self, food_name: str):
-        for food in self.__food_list:
+        for food in self.__foodList:
             if food.get_name() == food_name:
-                self.__food_list.remove(food)
-                self.__food_number -= 1
-                break
+                self.__foodList.remove(food)
+                self.__foodNumber -= 1
+                return True
+        return False
+    
+#Please remove comments to check
+#Example test program
+thucDon=Menu()
+thucDon.add_drink("Nuoc loc",5000)
+thucDon.add_food("Mi xao",15000)
+thucDon.add_drink("Coca",12000)
+thucDon.add_drink("Nuoc chanh",7000)
+thucDon.add_food("Mi trung",20000)
+thucDon.add_food("Com",5000)
 
+#Test sort
+for food in thucDon.get_foodList():
+    print(food.get_name(),food.get_price())
+
+thucDon.sortUP_food_by_price()
+print("===================Sau khi sap xep=============================")
+for food in thucDon.get_foodList():
+    print(food.get_name(),food.get_price())
 

@@ -1,18 +1,23 @@
+# from Session import *
 from Item import Item
 
 class Food(Item):
     
-    def __init__(self, name: str, price: float, is_available: bool, selling_time: str, is_vegetarian: bool):
-        
-        super().__init__(name, price, is_available, selling_time)
-        self.__is_vegetarian = is_vegetarian    
+    def __init__(self, name: str, price: float, isAvailable: bool, sellingTime: str,shortDes:str,isVegetarian: bool):
+        super().__init__(name, price, isAvailable, sellingTime, shortDes)
+        self.__isVegetarian = isVegetarian    
     
-    def set_is_vegetarian(self, is_vegetarian: bool):
-        self.__is_vegetarian = is_vegetarian
+    def set_isVegetarian(self, isVegetarian: bool):
+        self.__isVegetarian = isVegetarian
         
-    def get_is_vegetarian(self):
-        return self.__is_vegetarian
+    def get_isVegetarian(self):
+        return self.__isVegetarian
     
     def print_infor(self):
         super().print_infor()
-        print(self.__is_vegetarian)
+        print(self.__isVegetarian)
+
+#Please remove comments to check        
+#Example test program
+# food1= Food("Mi xao",20000,True,"sang","Thuc an nhanh cho nguoi ban ron",False)
+# food1.print_infor()
